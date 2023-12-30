@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { Modal } from "@/components/ui/modal";
-import { UserButton } from "@clerk/nextjs";//
+import { UserButton } from "@clerk/nextjs";
 
 const SetupPage = () => {
     return (
