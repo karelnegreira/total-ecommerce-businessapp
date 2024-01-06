@@ -1,14 +1,16 @@
 "use client";
 
 import * as z from "zod";
-
+import { useState } from "react";
 import { useStoreModal } from "@/hooks/use-store-modal";
 import { Modal } from "@/components/ui/modal";
 import { useForm } from "react-hook-form";
+
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+
 
 
 const fromSchema = z.object({
@@ -18,6 +20,8 @@ const fromSchema = z.object({
 export const StoreModal = () => {
 
     const storeModal = useStoreModal();
+
+    const [ loading, setLoading ] = useState(false);
 
     const form = useForm<z.infer<typeof fromSchema>>({
         resolver: zodResolver(fromSchema), 
@@ -50,7 +54,7 @@ export const StoreModal = () => {
                                     <FormItem>
                                         <FormLabel>name</FormLabel>
                                         <FormControl>
-                                            <Input placeholder="E-Commerce" {...field}/>
+                                            <Input disabled={loading} placeholder="E-Commerce" {...field}/>
                                         </FormControl>
                                         <FormMessage/>
                                     </FormItem>
@@ -58,8 +62,8 @@ export const StoreModal = () => {
                             />
 
                             <div className="pt-6 space-x-2 flex items-center justify-end w-full">
-                                <Button variant="outline" onClick={storeModal.onClose}>Cancel</Button>
-                                <Button type="submit" variant="destructive">Continue</Button>
+                                <Button disabled={loading} variant="outline" onClick={storeModal.onClose}>Cancel</Button>
+                                <Button disabled={loading} type="submit" variant="destructive">Continue</Button>
                             </div>
                             
                             
