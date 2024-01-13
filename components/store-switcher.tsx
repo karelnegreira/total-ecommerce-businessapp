@@ -5,10 +5,11 @@ import { Store } from "@prisma/client";
 import { useParams, useRouter } from "next/navigation";
 import { useState } from "react";
 
-import { Popover, PopoverTrigger } from "@/components/ui/popover";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { useStoreModal } from "@/hooks/use-store-modal";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { Command, CommandInput, CommandList } from "@/components/ui/command";
 
 type PopoverTriggerProps = React.ComponentPropsWithoutRef<typeof PopoverTrigger>
 
@@ -41,10 +42,17 @@ export default function StoreSwitcher({className, items = []}: StoreSwitcherProp
                <Button variant="outline" size="sm" role="combobox" aria-expanded={open} aria-label="Select a store" 
                className={cn("w-[200px] justify-between", className)}>
                    <StoreIcon className="mr-2 h-4 w-4"/>
-                   Current Store
+                        Current Store
                    <ChevronsUpDown className="ml-auto h-4 w-4 shrink-0 opacity-50"/>
                 </Button> 
            </PopoverTrigger>
+           <PopoverContent className="w-[200px] p-0">
+                <Command>
+                    <CommandList>
+                        <CommandInput placeholder="Search store..."  />
+                    </CommandList>
+                </Command>
+           </PopoverContent>
         </Popover>
     );
 };
