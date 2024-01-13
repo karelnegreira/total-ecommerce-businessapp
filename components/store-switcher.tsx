@@ -9,7 +9,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import { useStoreModal } from "@/hooks/use-store-modal";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { Command, CommandInput, CommandList } from "@/components/ui/command";
+import { Command, CommandEmpty, CommandInput, CommandList } from "@/components/ui/command";
 
 type PopoverTriggerProps = React.ComponentPropsWithoutRef<typeof PopoverTrigger>
 
@@ -50,6 +50,7 @@ export default function StoreSwitcher({className, items = []}: StoreSwitcherProp
                 <Command>
                     <CommandList>
                         <CommandInput placeholder="Search store..."  />
+                        <CommandEmpty>No store found.</CommandEmpty>
                     </CommandList>
                 </Command>
            </PopoverContent>
