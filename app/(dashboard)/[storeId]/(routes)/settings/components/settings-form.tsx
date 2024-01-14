@@ -7,6 +7,8 @@ import  * as z  from "zod";
 import { Button } from "@/components/ui/button";
 import Heading from "@/components/ui/heading";
 import { Separator } from "@/components/ui/separator";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 interface StoreSettingsProps {
     initialData: Store;
@@ -16,7 +18,14 @@ const formSchema = z.object({
     name: z.string().min(1)
 });
 
+type SettingsFromValues = z.infer<typeof formSchema>;
+
 const SettingsForm: React.FC<StoreSettingsProps> = ({initialData}) => {
+
+    const form = useForm<SettingsFromValues>({
+        resolver: zodResolver(formSchema), 
+    });
+
   return (
     <>
         <div className="flex items-center justify-between">
