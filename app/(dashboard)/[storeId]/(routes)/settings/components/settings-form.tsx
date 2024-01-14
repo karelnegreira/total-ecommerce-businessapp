@@ -10,7 +10,8 @@ import { Button } from "@/components/ui/button";
 import Heading from "@/components/ui/heading";
 import { Separator } from "@/components/ui/separator";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Form, FormField, FormItem, FormLabel } from "@/components/ui/form";
+import { Form, FormControl, FormField, FormItem, FormLabel } from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
 
 interface StoreSettingsProps {
     initialData: Store;
@@ -54,6 +55,9 @@ const SettingsForm: React.FC<StoreSettingsProps> = ({initialData}) => {
                         render={({field}) => (
                             <FormItem>
                                 <FormLabel>Name</FormLabel>
+                                <FormControl>
+                                    <Input />
+                                </FormControl>
                             </FormItem>
                         )}
                     />
