@@ -10,7 +10,7 @@ import { Button } from "@/components/ui/button";
 import Heading from "@/components/ui/heading";
 import { Separator } from "@/components/ui/separator";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Form, FormControl, FormField, FormItem, FormLabel } from "@/components/ui/form";
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 
 interface StoreSettingsProps {
@@ -41,7 +41,12 @@ const SettingsForm: React.FC<StoreSettingsProps> = ({initialData}) => {
     <>
         <div className="flex items-center justify-between">
             <Heading title="Settings" description="Manage store preferences" />
-            <Button variant="destructive" size="sm" onClick={() => {}}>
+            <Button 
+                disabled={loading} 
+                variant="destructive" 
+                size="sm" 
+                onClick={() => setOpen(true)}
+            >
                 <Trash className="h-4 w-4"/>
             </Button>
         </div>
@@ -58,6 +63,7 @@ const SettingsForm: React.FC<StoreSettingsProps> = ({initialData}) => {
                                 <FormControl>
                                     <Input disabled={loading} placeholder="Store name" {...field} />
                                 </FormControl>
+                                <FormMessage />
                             </FormItem>
                         )}
                     />
