@@ -56,12 +56,15 @@ const SettingsForm: React.FC<StoreSettingsProps> = ({initialData}) => {
                             <FormItem>
                                 <FormLabel>Name</FormLabel>
                                 <FormControl>
-                                    <Input />
+                                    <Input disabled={loading} placeholder="Store name" {...field} />
                                 </FormControl>
                             </FormItem>
                         )}
                     />
                 </div>
+                <Button disabled={loading} className="ml-auto" type="submit">
+                    Save changes
+                </Button>
             </form>
         </Form>
     </>
