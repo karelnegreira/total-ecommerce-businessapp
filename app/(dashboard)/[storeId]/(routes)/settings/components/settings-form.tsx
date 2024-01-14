@@ -13,7 +13,7 @@ interface StoreSettingsProps {
 }
 
 const formSchema = z.object({
-    name: z.string().min(1);
+    name: z.string().min(1)
 });
 
 const SettingsForm: React.FC<StoreSettingsProps> = ({initialData}) => {
