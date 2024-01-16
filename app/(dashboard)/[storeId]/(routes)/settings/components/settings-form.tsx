@@ -76,6 +76,7 @@ const SettingsForm: React.FC<StoreSettingsProps> = ({initialData}) => {
             onConfirm={onDelete}
             loading={loading}
         />
+        
         <div className="flex items-center justify-between">
             <Heading title="Settings" description="Manage store preferences" />
             <Button 
