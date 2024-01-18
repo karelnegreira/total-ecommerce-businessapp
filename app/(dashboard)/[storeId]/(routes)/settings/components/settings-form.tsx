@@ -113,7 +113,7 @@ const SettingsForm: React.FC<StoreSettingsProps> = ({initialData}) => {
             </form>
         </Form>
         <Separator />
-        <ApiAlert title="test" description="test-desc" />
+        <ApiAlert title="test" description="test-desc" variant="public" />
     </>
   )
 }
