@@ -1,7 +1,6 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { Link2 } from "lucide-react";
 import Link from "next/link";
 import { useParams, usePathname } from "next/navigation";
 
@@ -15,6 +14,11 @@ export function MainNav({className, ...props}: React.HTMLAttributes<HTMLElement>
             href: `/${params.storeId}`, 
             label: 'Overview', 
             active: pathname ===   `/${params.storeId}`, 
+        }, 
+        {
+            href: `/${params.storeId}/billboards`, 
+            label: 'Billboards', 
+            active: pathname ===   `/${params.storeId}/billboards`, 
         }, 
         {
             href: `/${params.storeId}/settings`, 
