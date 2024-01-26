@@ -40,7 +40,7 @@ const BillboardForm: React.FC<BillboardFormProps> = ({initialData}) => {
     const [loading, setLoading] = useState(false);
 
     const title = initialData ? "Edit billboard" : "Create billboard";
-    const description = initialData ? "Edit a billboard" : "ADd a new billboard";
+    const description = initialData ? "Edit a billboard" : "Add a new billboard";
     const toastMessage = initialData ? "Billboard updated" : "Billboard created";
     const action = initialData ? "Save changes" : "Create";
 
@@ -91,14 +91,19 @@ const BillboardForm: React.FC<BillboardFormProps> = ({initialData}) => {
         
         <div className="flex items-center justify-between">
             <Heading title={title} description={description} />
-            <Button 
-                disabled={loading} 
-                variant="destructive" 
-                size="sm" 
-                onClick={() => setOpen(true)}
-            >
-                <Trash className="h-4 w-4"/>
-            </Button>
+            {
+                initialData && (
+                    <Button 
+                        disabled={loading} 
+                        variant="destructive" 
+                        size="sm" 
+                        onClick={() => setOpen(true)}
+                    >
+                        <Trash className="h-4 w-4"/>
+                    </Button>
+                ) 
+            }
+            
         </div>
         <Separator />
         <Form {...form}>
