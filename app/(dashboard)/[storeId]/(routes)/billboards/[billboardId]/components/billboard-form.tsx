@@ -90,7 +90,7 @@ const BillboardForm: React.FC<BillboardFormProps> = ({initialData}) => {
         />
         
         <div className="flex items-center justify-between">
-            <Heading title="Settings" description="Manage store preferences" />
+            <Heading title={title} description={description} />
             <Button 
                 disabled={loading} 
                 variant="destructive" 
@@ -119,16 +119,12 @@ const BillboardForm: React.FC<BillboardFormProps> = ({initialData}) => {
                     />
                 </div>
                 <Button disabled={loading} className="ml-auto" type="submit">
-                    Save changes
+                    {action}
                 </Button>
             </form>
         </Form>
         <Separator />
-        <ApiAlert title="NEXT_PUBLIC_API_URL" 
-                  description={`${origin}/api/${params.storeId}`} 
-                  variant="public" 
-                  
-        />
+        
     </>
   )
 }
