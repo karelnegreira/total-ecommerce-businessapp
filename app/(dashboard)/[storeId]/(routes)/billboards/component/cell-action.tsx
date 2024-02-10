@@ -1,6 +1,6 @@
 "use client";
 
-import { DropdownMenu, DropdownMenuTrigger } from "@radix-ui/react-dropdown-menu";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuLabel, DropdownMenuTrigger } from "@radix-ui/react-dropdown-menu";
 
 import { Button } from "@/components/ui/button";
 import { BillboardColumn } from "./columns";
@@ -20,6 +20,11 @@ export const CellAction: React.FC<CellActionProps> = ({data,}) => {
                 <MoreHorizontal className="h-4 w-4"/>
             </Button>
         </DropdownMenuTrigger>
+        <DropdownMenuContent align="end">
+            <DropdownMenuLabel>
+                Actions
+            </DropdownMenuLabel>
+        </DropdownMenuContent>
     </DropdownMenu>
   );
 };
