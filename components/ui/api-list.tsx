@@ -1,9 +1,28 @@
 "use client";
 
-export const ApiList = () => {
+import { useOrigin } from "@/hooks/use-origins";
+import { useParams } from "next/navigation";
+import { ApiAlert } from "./api-alert";
+
+interface ApiListProps {
+    entityName: string;
+    entityIdName: string; 
+}
+
+export const ApiList: React.FC<ApiListProps> = ({entityName, entityIdName}) => {
+    
+    const params = useParams();
+    const origin = useOrigin();
+    
+    const baseUrl = `${origin}/api/${params.storeId}`;
+
     return (
-        <div>
-            Api List
-        </div>
+        <>
+            <ApiAlert 
+                title="GET"
+                variant="public"
+                description={`${baseUrl}/${entityName}`}
+            />
+        </>
     );
 }
