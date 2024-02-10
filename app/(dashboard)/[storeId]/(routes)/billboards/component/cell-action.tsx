@@ -8,6 +8,8 @@ import { Copy, Edit, MoreHorizontal, Trash } from "lucide-react";
 import { DropdownMenuItem } from "@/components/ui/dropdown-menu";
 import toast from "react-hot-toast";
 import { useParams, useRouter } from "next/navigation";
+import { useState } from "react";
+import axios from "axios";
 
 
 interface CellActionProps {
@@ -18,10 +20,27 @@ export const CellAction: React.FC<CellActionProps> = ({data,}) => {
 
     const router = useRouter();
     const params = useParams();
+    const[loading, setLoading] = useState(false);
+    const [open, setOpen] = useState(false);
 
     const onCopy = (id: string) => {
         navigator.clipboard.writeText(id);
         toast.success("Billboard id copied to the clipboard");
+    };
+
+    const onDelete = async () => {
+        try {
+            setLoading(true);
+            await axios.delete(`/api/${params.storeId}/billboards/${params.billboardId}`)
+            router.refresh();
+            router.push("/");
+            toast.success("Billboard deleted.");
+        } catch (error) {
+            toast.error("Make sure you remove all categories using this billboard")
+        } finally {
+            setLoading(false);
+            setOpen(false);
+        };
     };
 
   return (
