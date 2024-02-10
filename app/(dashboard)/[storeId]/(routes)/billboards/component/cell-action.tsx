@@ -4,7 +4,7 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuLabel, DropdownMenuTrigg
 
 import { Button } from "@/components/ui/button";
 import { BillboardColumn } from "./columns";
-import { Edit, MoreHorizontal } from "lucide-react";
+import { Copy, Edit, MoreHorizontal } from "lucide-react";
 import { DropdownMenuItem } from "@/components/ui/dropdown-menu";
 
 
@@ -25,6 +25,10 @@ export const CellAction: React.FC<CellActionProps> = ({data,}) => {
             <DropdownMenuLabel>
                 Actions
             </DropdownMenuLabel>
+            <DropdownMenuItem>
+                <Copy className="mr-2 h-4 w-4"/>
+                    Copy Id
+            </DropdownMenuItem>
             <DropdownMenuItem>
                 <Edit className="mr-2 h-4 w-4"/>
                     Update
