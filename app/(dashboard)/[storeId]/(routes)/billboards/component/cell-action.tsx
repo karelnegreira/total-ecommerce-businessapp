@@ -4,7 +4,8 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuLabel, DropdownMenuTrigg
 
 import { Button } from "@/components/ui/button";
 import { BillboardColumn } from "./columns";
-import { MoreHorizontal } from "lucide-react";
+import { Edit, MoreHorizontal } from "lucide-react";
+import { DropdownMenuItem } from "@/components/ui/dropdown-menu";
 
 
 interface CellActionProps {
@@ -24,6 +25,10 @@ export const CellAction: React.FC<CellActionProps> = ({data,}) => {
             <DropdownMenuLabel>
                 Actions
             </DropdownMenuLabel>
+            <DropdownMenuItem>
+                <Edit className="mr-2 h-4 w-4"/>
+                    Update
+            </DropdownMenuItem>
         </DropdownMenuContent>
     </DropdownMenu>
   );
