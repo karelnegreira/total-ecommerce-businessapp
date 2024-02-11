@@ -19,6 +19,7 @@ import { useParams, useRouter } from "next/navigation";
 import { Input } from "@/components/ui/input";
 import { AlertModal } from "@/components/modals/alert-modal";
 import { Select, SelectContent, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { SelectItem } from "@radix-ui/react-select";
 
 
 const formSchema = z.object({
@@ -151,7 +152,11 @@ const CategoryForm: React.FC<CategoryFormProps> = ({initialData, billboards}) =>
                                             </SelectTrigger>
                                         </FormControl>
                                         <SelectContent>
-
+                                            {billboards.map((billboard) => (
+                                                <SelectItem key={billboard.id} value={billboard.id}>
+                                                    {billboard.label}
+                                                </SelectItem>
+                                            ))}
                                         </SelectContent>
                                     </Select>
                                 <FormMessage />
