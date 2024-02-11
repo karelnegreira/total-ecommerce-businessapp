@@ -18,6 +18,7 @@ import { useParams, useRouter } from "next/navigation";
 
 import { Input } from "@/components/ui/input";
 import { AlertModal } from "@/components/modals/alert-modal";
+import { Select, SelectContent, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 
 const formSchema = z.object({
@@ -29,9 +30,10 @@ type CategoryFormValues = z.infer<typeof formSchema>
 
 interface CategoryFormProps {
     initialData: Category | null;
+    billboards: Billboard[]
 }
 
-const CategoryForm: React.FC<CategoryFormProps> = ({initialData}) => {
+const CategoryForm: React.FC<CategoryFormProps> = ({initialData, billboards}) => {
 
     const params = useParams();
     const router = useRouter();
@@ -125,6 +127,33 @@ const CategoryForm: React.FC<CategoryFormProps> = ({initialData}) => {
                                 <FormControl>
                                     <Input disabled={loading} placeholder="Category name" {...field} />
                                 </FormControl>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+                    <FormField 
+                        control={form.control} 
+                        name="billboardId"
+                        render={({field}) => (
+                            <FormItem>
+                                <FormLabel>Billboard</FormLabel>
+                                    <Select disabled={loading} 
+                                            onValueChange={field.onChange} 
+                                            value={field.value} 
+                                            defaultValue={field.value}
+                                    >
+                                        <FormControl>
+                                            <SelectTrigger>
+                                                <SelectValue
+                                                    defaultValue={field.value}
+                                                    placeholder="Select a billboard"
+                                                />
+                                            </SelectTrigger>
+                                        </FormControl>
+                                        <SelectContent>
+
+                                        </SelectContent>
+                                    </Select>
                                 <FormMessage />
                             </FormItem>
                         )}
