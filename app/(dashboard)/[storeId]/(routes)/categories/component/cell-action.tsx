@@ -3,7 +3,7 @@
 import { DropdownMenu, DropdownMenuContent, DropdownMenuLabel, DropdownMenuTrigger } from "@radix-ui/react-dropdown-menu";
 
 import { Button } from "@/components/ui/button";
-import { BillboardColumn } from "./columns";
+import { CategoryColumn } from "./columns";
 import { Copy, Edit, MoreHorizontal, Trash } from "lucide-react";
 import { DropdownMenuItem } from "@/components/ui/dropdown-menu";
 import toast from "react-hot-toast";
@@ -14,7 +14,7 @@ import { AlertModal } from "@/components/modals/alert-modal";
 
 
 interface CellActionProps {
-    data: BillboardColumn;
+    data: CategoryColumn;
 }
 
 export const CellAction: React.FC<CellActionProps> = ({data,}) => {
@@ -32,7 +32,7 @@ export const CellAction: React.FC<CellActionProps> = ({data,}) => {
     const onDelete = async () => {
         try {
             setLoading(true);
-            await axios.delete(`/api/${params.storeId}/billboards/${data.id}`)
+            await axios.delete(`/api/${params.storeId}/categories/${data.id}`)
             router.refresh();
             toast.success("Billboard deleted.");
         } catch (error) {

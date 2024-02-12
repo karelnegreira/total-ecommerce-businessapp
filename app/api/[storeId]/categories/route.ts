@@ -45,7 +45,7 @@ export async function POST(
         data: {
           name,
           billboardId,
-          storeId: params.storeId,
+          storeId: params.storeId
         }
       });
     

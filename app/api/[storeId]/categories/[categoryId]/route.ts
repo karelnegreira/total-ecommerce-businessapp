@@ -48,7 +48,7 @@ export async function PATCH(req: Request, {params}: {params: {storeId: string, c
         }
 
         if (!params.categoryId) {
-            return new NextResponse("Billboard id is required", {status: 401});
+            return new NextResponse("Category id is required", {status: 401});
         }
 
         const updatedCategory = await prismadb.category.updateMany({
@@ -61,21 +61,21 @@ export async function PATCH(req: Request, {params}: {params: {storeId: string, c
             }
         });
 
-        if (!billboard) {
+        if (!updatedCategory) {
             return new NextResponse("Unauthorized", { status: 403 });
         }
 
 
-        return NextResponse.json(billboard);
+        return NextResponse.json(updatedCategory);
         
     } catch (error) {
-        console.log('[BILLBOARD_PATCH]', error);
+        console.log('[CATEGORY_PATCH]', error);
         return new NextResponse("Internal error", {status: 500 } );  
     }
 }
 
 
-export async function DELETE(req: Request, {params}: {params: {storeId: string , billboardId: string }}) {
+export async function DELETE(req: Request, {params}: {params: {storeId: string , categoryId: string }}) {
     try {
         const { userId } = auth();
         
@@ -84,8 +84,8 @@ export async function DELETE(req: Request, {params}: {params: {storeId: string ,
             return new NextResponse("Unauthenticated", {status: 401 });
         }
 
-        if (!params.billboardId) {
-            return new NextResponse("Billboard id is required", {status: 400 });
+        if (!params.categoryId) {
+            return new NextResponse("Category id is required", {status: 400 });
         }
 
         const storeByUserId = await prismadb.store.findFirst({
@@ -99,17 +99,17 @@ export async function DELETE(req: Request, {params}: {params: {storeId: string ,
             return new NextResponse("Unauthorised", { status: 403})
         }
         
-        const billboard = await prismadb.billboard.deleteMany({
+        const categoryDeleted = await prismadb.category.deleteMany({
             where: {
-                id: params.billboardId, 
+                id: params.categoryId, 
             }
             
         });
 
-        return NextResponse.json(billboard);
+        return NextResponse.json(categoryDeleted);
         
     } catch (error) {
-        console.log('[BILLBOARD_DELETE]', error);
+        console.log('[CATEGORY_DELETE]', error);
         return new NextResponse("Internal error", {status: 500 } );  
     }
 }
