@@ -1,7 +1,7 @@
 import {format} from "date-fns";
 
 import prismadb from "@/lib/prismadb";
-import {ColorClient} from "./component/client";
+import {ColorsClient} from "./component/client";
 import { ColorColumn } from "./component/columns";
 
 
@@ -27,7 +27,7 @@ const ColorsPage = async ({params}: {params: {storeId: string}}) => {
   return (
     <div className="flex-col">
         <div className="flex-1 space-y-4 p-8 pt-6">
-            <ColorClient data={formattedColors} />
+            <ColorsClient data={formattedColors} />
         </div>
 
     </div>
