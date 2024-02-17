@@ -1,5 +1,5 @@
 import prismadb from "@/lib/prismadb";
-import SizeForm from "./components/size-form";
+import SizeForm from "./components/color-form";
 
 
 const ColorPage = async ({params} : {params: {colorId: string}}) => {
