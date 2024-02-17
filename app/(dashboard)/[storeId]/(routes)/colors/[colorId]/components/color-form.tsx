@@ -25,13 +25,13 @@ const formSchema = z.object({
     value: z.string().min(1), 
 });
 
-type SizeFormValues = z.infer<typeof formSchema>
+type ColorFormValues = z.infer<typeof formSchema>
 
-interface SizeFormProps {
+interface ColorFormProps {
     initialData: Size | null;
 }
 
-const SizeForm: React.FC<SizeFormProps> = ({initialData}) => {
+const ColorForm: React.FC<ColorFormProps> = ({initialData}) => {
 
     const params = useParams();
     const router = useRouter();
@@ -45,7 +45,7 @@ const SizeForm: React.FC<SizeFormProps> = ({initialData}) => {
     const toastMessage = initialData ? "Size updated" : "Size created";
     const action = initialData ? "Save changes" : "Create";
 
-    const form = useForm<SizeFormValues>({
+    const form = useForm<ColorFormValues>({
         resolver: zodResolver(formSchema), 
         defaultValues: initialData || {
             name: '', 
@@ -53,7 +53,7 @@ const SizeForm: React.FC<SizeFormProps> = ({initialData}) => {
         }
     });
 
-    const onSubmit = async (data: SizeFormValues) => {
+    const onSubmit = async (data: ColorFormValues) => {
         try {
             setLoading(true);
             if (initialData) {
@@ -153,4 +153,4 @@ const SizeForm: React.FC<SizeFormProps> = ({initialData}) => {
   );
 };
 
-export default SizeForm;
+export default ColorForm;
