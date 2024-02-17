@@ -1,6 +1,6 @@
 "use client";
 
-import { Size, Store } from "@prisma/client";
+import { Color } from "@prisma/client";
 import { Trash } from "lucide-react";
 import  * as z  from "zod";
 import { useForm } from "react-hook-form";
@@ -18,17 +18,19 @@ import { useParams, useRouter } from "next/navigation";
 
 import { Input } from "@/components/ui/input";
 import { AlertModal } from "@/components/modals/alert-modal";
-import ImageUpload from "@/components/ui/image-upload";
+
 
 const formSchema = z.object({
     name: z.string().min(1), 
-    value: z.string().min(1), 
+    value: z.string().min(4).regex(/^#/, {
+        message: 'String must be a valid hex code'
+    }), 
 });
 
 type ColorFormValues = z.infer<typeof formSchema>
 
 interface ColorFormProps {
-    initialData: Size | null;
+    initialData: Color | null;
 }
 
 const ColorForm: React.FC<ColorFormProps> = ({initialData}) => {
@@ -40,9 +42,9 @@ const ColorForm: React.FC<ColorFormProps> = ({initialData}) => {
     const [open, setOpen] = useState(false);
     const [loading, setLoading] = useState(false);
 
-    const title = initialData ? "Edit size" : "Create size";
-    const description = initialData ? "Edit a size" : "Add a new size";
-    const toastMessage = initialData ? "Size updated" : "Size created";
+    const title = initialData ? "Edit color" : "Create color";
+    const description = initialData ? "Edit a color" : "Add a new color";
+    const toastMessage = initialData ? "color updated" : "color created";
     const action = initialData ? "Save changes" : "Create";
 
     const form = useForm<ColorFormValues>({
@@ -57,12 +59,12 @@ const ColorForm: React.FC<ColorFormProps> = ({initialData}) => {
         try {
             setLoading(true);
             if (initialData) {
-                await axios.patch(`/api/${params.storeId}/sizes/${params.sizeId}`, data);
+                await axios.patch(`/api/${params.storeId}/colors/${params.colorId}`, data);
             } else {
-                await axios.post(`/api/${params.storeId}/sizes`, data);
+                await axios.post(`/api/${params.storeId}/colors`, data);
             }
             router.refresh();
-            router.push( `/${params.storeId}/sizes`)
+            router.push( `/${params.storeId}/colors`)
             toast.success(toastMessage);
         } catch (error) {
             toast.error("Something went wrong");
@@ -74,12 +76,12 @@ const ColorForm: React.FC<ColorFormProps> = ({initialData}) => {
     const onDelete = async () => {
         try {
             setLoading(true);
-            await axios.delete(`/api/${params.storeId}/sizes/${params.sizeId}`)
+            await axios.delete(`/api/${params.storeId}/colors/${params.colorId}`)
             router.refresh();
-            router.push(`/${params.storeId}/sizes`);
-            toast.success("Size deleted.");
+            router.push(`/${params.storeId}/colors`);
+            toast.success("color deleted.");
         } catch (error) {
-            toast.error("Make sure you remove all products using this size")
+            toast.error("Make sure you remove all products using this color")
         } finally {
             setLoading(false);
             setOpen(false);
@@ -102,7 +104,7 @@ const ColorForm: React.FC<ColorFormProps> = ({initialData}) => {
                     <Button 
                         disabled={loading} 
                         variant="destructive" 
-                        size="sm" 
+                        color="sm" 
                         onClick={() => setOpen(true)}
                     >
                         <Trash className="h-4 w-4"/>
@@ -122,7 +124,7 @@ const ColorForm: React.FC<ColorFormProps> = ({initialData}) => {
                             <FormItem>
                                 <FormLabel>Name</FormLabel>
                                 <FormControl>
-                                    <Input disabled={loading} placeholder="Size name" {...field} />
+                                    <Input disabled={loading} placeholder="color name" {...field} />   
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -135,7 +137,12 @@ const ColorForm: React.FC<ColorFormProps> = ({initialData}) => {
                             <FormItem>
                                 <FormLabel>Value</FormLabel>
                                 <FormControl>
-                                    <Input disabled={loading} placeholder="Size value" {...field} />
+                                    <div className="flex items-center gap-x-4">
+                                        <Input disabled={loading} placeholder="color value" {...field} />
+                                            <div className="border p-4 rounded-full"
+                                                    style={ { backgroundColor: field.value } }
+                                            />
+                                    </div>
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
