@@ -57,12 +57,12 @@ const SizeForm: React.FC<SizeFormProps> = ({initialData}) => {
         try {
             setLoading(true);
             if (initialData) {
-                await axios.patch(`/api/${params.storeId}/billboards/${params.billboardId}`, data);
+                await axios.patch(`/api/${params.storeId}/sizes/${params.sizeId}`, data);
             } else {
-                await axios.post(`/api/${params.storeId}/billboards`, data);
+                await axios.post(`/api/${params.storeId}/sizes`, data);
             }
             router.refresh();
-            router.push( `/${params.storeId}/billboards`)
+            router.push( `/${params.storeId}/sizes`)
             toast.success(toastMessage);
         } catch (error) {
             toast.error("Something went wrong");
@@ -74,12 +74,12 @@ const SizeForm: React.FC<SizeFormProps> = ({initialData}) => {
     const onDelete = async () => {
         try {
             setLoading(true);
-            await axios.delete(`/api/${params.storeId}/billboards/${params.billboardId}`)
+            await axios.delete(`/api/${params.storeId}/sizes/${params.sizeId}`)
             router.refresh();
-            router.push(`/${params.storeId}/billboards`);
-            toast.success("Billboard deleted.");
+            router.push(`/${params.storeId}/sizes`);
+            toast.success("Size deleted.");
         } catch (error) {
-            toast.error("Make sure you remove all categories using this billboard")
+            toast.error("Make sure you remove all products using this size")
         } finally {
             setLoading(false);
             setOpen(false);
