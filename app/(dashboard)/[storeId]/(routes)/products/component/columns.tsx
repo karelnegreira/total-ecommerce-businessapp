@@ -38,6 +38,23 @@ export const columns: ColumnDef<ProductColumn>[] = [
       header: "Category",
     },
     {
+      accessorKey: "size",
+      header: "Size",
+    },
+    {
+      accessorKey: "color",
+      header: "Color",
+      cell: ({row}) => (
+        <div className="flex item-center gap-x-2">
+          {row.original.color}
+          <div 
+            className="h-6 w-6 rounded-full border"
+            style={{ backgroundColor: row.original.color }}
+          />
+        </div>
+      )
+    },
+    {
       accessorKey: "createdAt",
       header: "Date",
     },
