@@ -131,16 +131,16 @@ const ProductForm: React.FC<ProductFormProps> = ({initialData}) => {
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 w-full">
                 <FormField 
                         control={form.control} 
-                        name="imageUrl"
+                        name="images"
                         render={({field}) => (
                             <FormItem>
-                                <FormLabel>Background image </FormLabel>
+                                <FormLabel>Images </FormLabel>
                                 <FormControl>
                                     <ImageUpload 
-                                        value={field.value ? [field.value] : [] }
+                                        value={field.value.map((image) => image.url) }
                                         disabled={loading}
-                                        onChange={(url) => field.onChange(url)}
-                                        onRemove={() => field.onChange("") }
+                                        onChange={(url) => field.onChange([...field.value, { url }])}
+                                        onRemove={(url) => field.onChange([...field.value.filter((curr) => curr.url !== url)]) }
                                     />
                                 </FormControl>
                                 <FormMessage />
