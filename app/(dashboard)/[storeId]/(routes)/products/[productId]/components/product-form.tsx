@@ -169,7 +169,7 @@ const ProductForm: React.FC<ProductFormProps> = ({initialData, categories, color
                         name="price"
                         render={({field}) => (
                             <FormItem>
-                                <FormLabel>Name</FormLabel>
+                                <FormLabel>Price</FormLabel>
                                 <FormControl>
                                     <Input disabled={loading} placeholder="9.99" {...field} />
                                 </FormControl>
@@ -182,7 +182,7 @@ const ProductForm: React.FC<ProductFormProps> = ({initialData, categories, color
                         name="categoryId"
                         render={({field}) => (
                             <FormItem>
-                                <FormLabel>Billboard</FormLabel>
+                                <FormLabel>Category</FormLabel>
                                     <Select disabled={loading} 
                                             onValueChange={field.onChange} 
                                             value={field.value} 
@@ -192,14 +192,45 @@ const ProductForm: React.FC<ProductFormProps> = ({initialData, categories, color
                                             <SelectTrigger>
                                                 <SelectValue
                                                     defaultValue={field.value}
-                                                    placeholder="Select a billboard"
+                                                    placeholder="Select a category"
                                                 />
                                             </SelectTrigger>
                                         </FormControl>
                                         <SelectContent>
                                             {categories.map((category) => (
                                                 <SelectItem key={category.id} value={category.id}>
-                                                    {category.id}
+                                                    {category.name}
+                                                </SelectItem>
+                                            ))}
+                                        </SelectContent>
+                                    </Select>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+                    <FormField 
+                        control={form.control} 
+                        name="sizeId"
+                        render={({field}) => (
+                            <FormItem>
+                                <FormLabel>Size</FormLabel>
+                                    <Select disabled={loading} 
+                                            onValueChange={field.onChange} 
+                                            value={field.value} 
+                                            defaultValue={field.value}
+                                    >
+                                        <FormControl>
+                                            <SelectTrigger>
+                                                <SelectValue
+                                                    defaultValue={field.value}
+                                                    placeholder="Select a size"
+                                                />
+                                            </SelectTrigger>
+                                        </FormControl>
+                                        <SelectContent>
+                                            {sizes.map((size) => (
+                                                <SelectItem key={size.id} value={size.id}>
+                                                    {size.name}
                                                 </SelectItem>
                                             ))}
                                         </SelectContent>
