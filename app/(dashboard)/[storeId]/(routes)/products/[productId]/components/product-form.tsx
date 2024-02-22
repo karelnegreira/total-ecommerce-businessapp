@@ -19,6 +19,7 @@ import { useParams, useRouter } from "next/navigation";
 import { Input } from "@/components/ui/input";
 import { AlertModal } from "@/components/modals/alert-modal";
 import ImageUpload from "@/components/ui/image-upload";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 const formSchema = z.object({
     name: z.string().min(1), 
@@ -170,6 +171,37 @@ const ProductForm: React.FC<ProductFormProps> = ({initialData}) => {
                                 <FormControl>
                                     <Input disabled={loading} placeholder="9.99" {...field} />
                                 </FormControl>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+                    <FormField 
+                        control={form.control} 
+                        name="categoryId"
+                        render={({field}) => (
+                            <FormItem>
+                                <FormLabel>Billboard</FormLabel>
+                                    <Select disabled={loading} 
+                                            onValueChange={field.onChange} 
+                                            value={field.value} 
+                                            defaultValue={field.value}
+                                    >
+                                        <FormControl>
+                                            <SelectTrigger>
+                                                <SelectValue
+                                                    defaultValue={field.value}
+                                                    placeholder="Select a billboard"
+                                                />
+                                            </SelectTrigger>
+                                        </FormControl>
+                                        <SelectContent>
+                                            {categories.map((category) => (
+                                                <SelectItem key={category.id} value={category.id}>
+                                                    {category.id}
+                                                </SelectItem>
+                                            ))}
+                                        </SelectContent>
+                                    </Select>
                                 <FormMessage />
                             </FormItem>
                         )}
