@@ -1,21 +1,20 @@
 "use client";
 
-import { Image, Product, Store } from "@prisma/client";
+import { Category, Color, Image, Product, Size, Store } from "@prisma/client";
 import { Trash } from "lucide-react";
 import  * as z  from "zod";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
+import axios from "axios";
+import toast from "react-hot-toast";
+import { useParams, useRouter } from "next/navigation";
+
 
 import { Button } from "@/components/ui/button";
 import {Heading} from "@/components/ui/heading";
 import { Separator } from "@/components/ui/separator";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-
-import axios from "axios";
-import toast from "react-hot-toast";
-import { useParams, useRouter } from "next/navigation";
-
 import { Input } from "@/components/ui/input";
 import { AlertModal } from "@/components/modals/alert-modal";
 import ImageUpload from "@/components/ui/image-upload";
@@ -36,9 +35,12 @@ type ProductFormValues = z.infer<typeof formSchema>
 
 interface ProductFormProps {
     initialData: Product & {images: Image[]} | null;
+    categories: Category[];
+    colors: Color[];
+    sizes: Size[];
 }
 
-const ProductForm: React.FC<ProductFormProps> = ({initialData}) => {
+const ProductForm: React.FC<ProductFormProps> = ({initialData, categories, colors, sizes}) => {
 
     const params = useParams();
     const router = useRouter();
