@@ -239,6 +239,37 @@ const ProductForm: React.FC<ProductFormProps> = ({initialData, categories, color
                             </FormItem>
                         )}
                     />
+                    <FormField 
+                        control={form.control} 
+                        name="colorId"
+                        render={({field}) => (
+                            <FormItem>
+                                <FormLabel>Color</FormLabel>
+                                    <Select disabled={loading} 
+                                            onValueChange={field.onChange} 
+                                            value={field.value} 
+                                            defaultValue={field.value}
+                                    >
+                                        <FormControl>
+                                            <SelectTrigger>
+                                                <SelectValue
+                                                    defaultValue={field.value}
+                                                    placeholder="Select a size"
+                                                />
+                                            </SelectTrigger>
+                                        </FormControl>
+                                        <SelectContent>
+                                            {colors.map((color) => (
+                                                <SelectItem key={color.id} value={color.id}>
+                                                    {color.name}
+                                                </SelectItem>
+                                            ))}
+                                        </SelectContent>
+                                    </Select>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
                 </div>
                 <Button disabled={loading} className="ml-auto" type="submit">
                     {action}
