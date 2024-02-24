@@ -276,7 +276,10 @@ const ProductForm: React.FC<ProductFormProps> = ({initialData, categories, color
                         name="isFeatured"
                         render={({field}) => (
                             <FormItem className="flex flex-row items-start space-x-3 space-y-4-0 rounded-md border p-4">
-                                <Checkbox checked={field.value} onCheckedChange={field.onChange}/>
+                                <Checkbox 
+                                    checked={field.value} 
+                                    onCheckedChange={field.onChange}
+                                />
                             </FormItem>
                         )}
                     />
