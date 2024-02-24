@@ -96,9 +96,9 @@ const ProductForm: React.FC<ProductFormProps> = ({initialData, categories, color
             await axios.delete(`/api/${params.storeId}/products/${params.productId}`)
             router.refresh();
             router.push(`/${params.storeId}/products`);
-            toast.success("product deleted.");
+            toast.success("Product deleted.");
         } catch (error) {
-            toast.error("Make sure you remove all categories using this product")
+            toast.error("Something went wrong")
         } finally {
             setLoading(false);
             setOpen(false);
