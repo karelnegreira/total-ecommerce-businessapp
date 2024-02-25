@@ -1,6 +1,6 @@
 "use client";
 
-import { DropdownMenu, DropdownMenuContent, DropdownMenuLabel, DropdownMenuTrigger } from "@radix-ui/react-dropdown-menu";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuLabel, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 
 import { Button } from "@/components/ui/button";
 import { SizeColumn } from "./columns";
