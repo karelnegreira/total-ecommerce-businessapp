@@ -255,7 +255,7 @@ const ProductForm: React.FC<ProductFormProps> = ({initialData, categories, color
                                             <SelectTrigger>
                                                 <SelectValue
                                                     defaultValue={field.value}
-                                                    placeholder="Select a size"
+                                                    placeholder="Select a color"
                                                 />
                                             </SelectTrigger>
                                         </FormControl>
