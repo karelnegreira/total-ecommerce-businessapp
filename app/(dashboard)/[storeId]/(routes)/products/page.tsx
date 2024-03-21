@@ -35,16 +35,15 @@ const ProductPage = async ({params}: {params: {storeId: string}}) => {
       color: item.color.value, 
       createdAt: format(item.createdAt, "MMMM do, yyy")
     }
-  ))
+  ));
 
   return (
     <div className="flex-col">
         <div className="flex-1 space-y-4 p-8 pt-6">
             <ProductClient data={formattedProducts} />
         </div>
-
     </div>
-  )
+  );
 }
 
 export default ProductPage;

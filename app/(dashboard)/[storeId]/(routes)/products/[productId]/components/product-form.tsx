@@ -159,7 +159,7 @@ const ProductForm: React.FC<ProductFormProps> = ({initialData, categories, color
                             <FormItem>
                                 <FormLabel>Name</FormLabel>
                                 <FormControl>
-                                    <Input disabled={loading} placeholder="product name" {...field} />
+                                    <Input disabled={loading} placeholder="product name" {...field } />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -171,9 +171,9 @@ const ProductForm: React.FC<ProductFormProps> = ({initialData, categories, color
                         render={({field}) => (
                             <FormItem>
                                 <FormLabel>Price</FormLabel>
-                                <FormControl>
-                                    <Input disabled={loading} placeholder="9.99" {...field} />
-                                </FormControl>
+                                    <FormControl>
+                                        <Input type="number" disabled={loading} placeholder="9.99" {...field } />
+                                    </FormControl>
                                 <FormMessage />
                             </FormItem>
                         )}
