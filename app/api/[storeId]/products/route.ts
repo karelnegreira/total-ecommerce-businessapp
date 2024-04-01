@@ -22,7 +22,7 @@ export async function POST(
         return new NextResponse("Name is required", { status: 400 });
       }
 
-      if (!images || images.length == 0) {
+      if (!images || !images.length) {
         return new NextResponse("Images are required", {status: 400 });
       }
   
@@ -51,7 +51,7 @@ export async function POST(
       const storeByUserId = await prismadb.store.findFirst({
         where: {
           id: params.storeId,
-          userId,
+          userId
         }
       });
   
@@ -73,10 +73,10 @@ export async function POST(
             createMany: {
               data: [
                 ... images.map((image: {url: string}) => image )
-              ],
-            },
-          },
-        },
+              ]
+            }
+          }
+        }
       });
     
       return NextResponse.json(product);

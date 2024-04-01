@@ -5,7 +5,6 @@ import { NextResponse } from "next/server";
 
 export async function GET(req: Request, {params}: {params: { productId: string }}) {
     try {
-       
         if (!params.productId) {
             return new NextResponse("Product id is required", {status: 400 });
         }
@@ -39,9 +38,6 @@ export async function PATCH(req: Request, {params}: {params: {storeId: string, p
 
         const { name, price, categoryId, colorId, sizeId, images, isFeatured, isArchived } = body;
 
-        if (!userId) {
-            return new NextResponse("Unauthenticated", {status: 401 });
-        }
 
         if (!userId) {
             return new NextResponse("Unauthenticated", { status: 403 });
@@ -51,7 +47,7 @@ export async function PATCH(req: Request, {params}: {params: {storeId: string, p
             return new NextResponse("Name is required", { status: 400 });
           }
     
-          if (!images || images.length == 0) {
+          if (!images || !images.length) {
             return new NextResponse("Images are required", {status: 400 });
           }
       
@@ -62,17 +58,18 @@ export async function PATCH(req: Request, {params}: {params: {storeId: string, p
           if (!categoryId) {
             return new NextResponse("Category Id is required", { status: 400 });
           }
+
+          if (!sizeId) {
+            return new NextResponse("Size Id is required", { status: 400 });
+          }
     
           if (!colorId) {
             return new NextResponse("Color Id is required", { status: 400 });
           }
     
-          if (!sizeId) {
-            return new NextResponse("Size Id is required", { status: 400 });
-          }
-
-        if (!params.productId) {
-            return new NextResponse("Billboard id is required", {status: 401});
+        
+          if (!params.productId) {
+            return new NextResponse("Product id is required", {status: 401});
         }
 
         const storeByUserId = await prismadb.store.findFirst({
@@ -112,22 +109,17 @@ export async function PATCH(req: Request, {params}: {params: {storeId: string, p
                 images: {
                     createMany: {
                         data: [
-                            ...images.map((image: string) => image)
+                            ...images.map((image: {url: string}) => image)
                         ]
                     }
                 }
             }
         })
 
-        if (!product) {
-            return new NextResponse("Unauthorized", { status: 403 });
-        }
-
-
         return NextResponse.json(product);
         
     } catch (error) {
-        console.log('[BILLBOARD_PATCH]', error);
+        console.log('[PRODUCT_PATCH]', error);
         return new NextResponse("Internal error", {status: 500 } );  
     }
 }
