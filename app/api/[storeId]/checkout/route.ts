@@ -1,5 +1,5 @@
 import Stripe from 'stripe';
-import { NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
 
 import { stripe } from '@/lib/stripe';
 import prismadb from '@/lib/prismadb';
@@ -67,6 +67,14 @@ export async function POST(req: Request, {params}: {params: {storeId: string}}) 
         phone_number_collection: {
             enabled: true
         }, 
-        success_url: ``
-    })
+        success_url: `${process.env.FRONTEND_STORE_URL}/cart?success=1`, 
+        cancel_url: `${process.env.FRONTEND_STORE_URL}/cart?canceled=1`, 
+        metadata: {
+            orderId: order.id
+        }
+    });
+
+    return NextResponse.json({url: session.url}, {
+        headers: corsHeaders
+    });
 }
