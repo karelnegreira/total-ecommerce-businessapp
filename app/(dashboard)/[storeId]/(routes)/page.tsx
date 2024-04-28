@@ -1,3 +1,5 @@
+import { Heading } from "@/components/ui/heading";
+import { Separator } from "@/components/ui/separator";
 import prismadb from "@/lib/prismadb";
 
 
@@ -6,15 +8,13 @@ interface DashboadPageProps {
 } 
 
 const DashboardPage: React.FC<DashboadPageProps> = async ({params}) => {
-  const store = await prismadb.store.findFirst({
-    where: {
-      id: params.storeId
-    }
-  });
-
+  
   return (
-    <div>
-      Active store: {store?.name}
+    <div className="flex-col">
+        <div className="flex-1 space-y-4 p-8 pt-6">
+          <Heading title="Dashboard" description="Overview your store"/>
+          <Separator/>
+        </div>
     </div>
   );
 }
