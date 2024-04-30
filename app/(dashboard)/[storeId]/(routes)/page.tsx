@@ -1,3 +1,4 @@
+import { getGraphRevenue } from "@/actions/get-graph-data";
 import { getSalesCount } from "@/actions/get-sales-count";
 import { getStockCount } from "@/actions/get-stock-count";
 import { getTotalRevenue } from "@/actions/get-total-revenue";
@@ -7,7 +8,7 @@ import { Heading } from "@/components/ui/heading";
 import { Separator } from "@/components/ui/separator";
 import prismadb from "@/lib/prismadb";
 import { formatter } from "@/lib/utils";
-import { CreditCard, DollarSign } from "lucide-react";
+import { CreditCard, DollarSign, Package } from "lucide-react";
 
 
 interface DashboadPageProps {
@@ -18,6 +19,7 @@ const DashboardPage: React.FC<DashboadPageProps> = async ({params}) => {
     const totalRevenue  = await getTotalRevenue(params.storeId);
     const salesCount = await getSalesCount(params.storeId);
     const stockCount = await getStockCount(params.storeId)
+    const graphRevenue = await getGraphRevenue(params.storeId);
 
   return (
     <div className="flex-col">
@@ -58,7 +60,7 @@ const DashboardPage: React.FC<DashboadPageProps> = async ({params}) => {
                 <CardTitle className="text-sm font-medium">
                   Products in Stock
                 </CardTitle> 
-                <DollarSign className="h-4 w-4 text-muted-foreground"/>
+                <Package className="h-4 w-4 text-muted-foreground"/>
               </CardHeader>
               <CardContent>
                 <div className="text-2xl font-bold">
@@ -72,8 +74,8 @@ const DashboardPage: React.FC<DashboadPageProps> = async ({params}) => {
           <CardHeader>
             <CardTitle>Overview</CardTitle>
           </CardHeader>
-          <CardContent className="">
-            <Overview data={[]}/>
+          <CardContent className="pl-2">
+            <Overview data={graphRevenue}/>
           </CardContent>
         </Card>
     </div>
