@@ -27,8 +27,8 @@ export default function RootLayout({
       <body className={inter.className}>
         <ThemeProvider attribute='class' defaultTheme='dark' enableSystem>
           <ToastProvider />
-          <ModalProvider />
-          {children}
+            <ModalProvider />
+            {children}
         </ThemeProvider>
       </body>
     </html>
